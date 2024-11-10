@@ -110,11 +110,25 @@ class LinkedList {
         temp.next = null
         return temp
     }
+
+    reverse() {
+        let temp = this.head
+        this.head = this.tail
+        this.tail = temp
+        let next = temp.next
+        let prev = null
+        for (let i = 0; i < this.length; i++) {
+            next = temp.next
+            temp.next = prev
+            prev = temp
+            temp = next
+        }
+        return this
+    }
 }
 
 const my_ll = new LinkedList(4) 
 my_ll.push(5)
 my_ll.push(6)
 console.log(my_ll)
-my_ll.remove(1)
-console.log(my_ll)
+console.log(my_ll.reverse())
