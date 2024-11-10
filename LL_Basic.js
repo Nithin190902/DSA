@@ -79,10 +79,42 @@ class LinkedList {
         }
         return temp
     }
+
+    set(index, value) {
+        let temp = this.get(index)
+        if (temp) {
+            temp.value = value
+            return true
+        }
+        return false
+    }
+
+    insert(index, value) {
+        if(index === 0) return this.unshift(value)
+        if(index === this.length) return this.push(value)
+        if(index<0 || index < this.length) return false
+        let newNode = new Node(value)
+        let temp = this.get(index-1)
+        newNode.next =  temp.next
+        temp.next = newNode
+        return true
+    }
+
+    remove(index) {
+        if(index === 0) return this.unshift()
+        if(index === this.length-1) return this.pop()
+        if(index < 0 || index < this.length) return false
+        let temp = this.get(index)
+        let prev = this.get(index-1)
+        prev.next = temp.next
+        temp.next = null
+        return temp
+    }
 }
 
 const my_ll = new LinkedList(4) 
 my_ll.push(5)
 my_ll.push(6)
 console.log(my_ll)
-console.log(my_ll.get(2))
+my_ll.remove(1)
+console.log(my_ll)
