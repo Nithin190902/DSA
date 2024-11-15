@@ -11,7 +11,7 @@ class DoublyLinkedList {
         const NewNode = new Node(value)
         this.head = NewNode
         this.tail = this.head
-        this.length ++
+        this.length = 1
     }
     push (value) {
         const NewNode = new Node(value)
@@ -74,7 +74,7 @@ class DoublyLinkedList {
 
     get(index) {
         if (index < 0 || index >= this.length) return undefined
-        const temp = this.head
+        let temp = this.head
         if (index < this.length/2) {
             for (let i = 0; i < index ; i++) {
                 temp = temp.next
@@ -84,7 +84,9 @@ class DoublyLinkedList {
             for (let i = this.length-1 ; i > index ; i--) {
                 temp = temp.prev
             }
-        }return temp
+        }
+        console.log("length",this.length/2)
+        return temp
     }
 
     set(index, value) {
@@ -118,6 +120,26 @@ class DoublyLinkedList {
         temp.prev = null
         return temp
     }
+
+    isPalindrome() {
+        if ( this.length <= 1) return true
+        let forword = this.head
+        let backword = this.tail
+        for (var i = 0; i < this.length/2; i++) {
+            if (forword.value !== backword.value) return false
+            forword = forword.next
+            backword = backword.prev
+        }
+        return true
+    }
         
     
 }
+
+const my_dll = new DoublyLinkedList(4)
+my_dll.push(4)
+console.log(my_dll.isPalindrome())
+// my_dll.push(6)
+// my_dll.push(7)
+// my_dll.push(8)
+// console.log(my_dll.get(0))
